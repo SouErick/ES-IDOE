@@ -21,8 +21,9 @@ public class Doacao {
     @JoinColumn(name = "empresa_id")
     private PessoaJuridica empresa;
 
-
-    private List<FormaPagamento> formasPagamento;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "doacao_id")
+    private List<FormaPagamento> formasPagamento = new ArrayList<>();
 
     public Doacao() {
         this.formasPagamento = new ArrayList<>(); 
@@ -37,7 +38,14 @@ public class Doacao {
         this.valor = valor;
         this.formasPagamento = new ArrayList<>(); 
     }
+    
+    public PessoaJuridica getEmpresa() {
+        return empresa;
+    }
 
+    public void setEmpresa(PessoaJuridica empresa) {
+        this.empresa = empresa;
+    }
     public void solicitarDoacao() {
         System.out.println("Método solicitarDoacao() chamado.");
     }
@@ -60,12 +68,12 @@ public class Doacao {
         this.id = id;
     }
 
-    public Date getData() { 
-        return data;
+    public void setData(Date data) {
+        this.data = data;
     }
 
-    public void setData(Date data) { 
-        this.data = data;
+    public Date getData() {
+        return data;
     }
 
     public String getTitulo() {
@@ -87,7 +95,7 @@ public class Doacao {
     public double getValor() {
         return valor;
     }
-
+    
     public void setValor(double valor) { 
         this.valor = valor;
     }
