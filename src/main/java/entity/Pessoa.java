@@ -35,9 +35,8 @@ public abstract class Pessoa {
         this.enderecos = new ArrayList<>();
     }
 
-    public boolean login() {
-        System.out.println("Método login() chamado para: " + this.email);
-        return false;
+    public boolean login(String email, String senha) {
+        return this.email.equals(email) && this.senha.equals(senha);
     }
 
     public boolean cadastrar() {

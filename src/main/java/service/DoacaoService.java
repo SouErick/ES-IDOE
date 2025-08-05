@@ -31,7 +31,12 @@ public class DoacaoService {
         doacao.setData(dto.getData());  
         doacao.setEspecificacao(dto.getEspecificacao());
         doacao.setEmpresa(empresa);
-
+        if (dto.getValor() <= 0) {
+            throw new IllegalArgumentException("Valor da doação deve ser positivo.");
+        }
+        if (dto.getTitulo() == null || dto.getTitulo().isEmpty()) {
+            throw new IllegalArgumentException("Título da doação é obrigatório.");
+        }
         return doacaoRepository.save(doacao);
     }
 

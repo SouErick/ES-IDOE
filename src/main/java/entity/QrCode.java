@@ -11,7 +11,7 @@ public class QrCode implements FormaPagamento {
     @Override
     public String gerarIdentificadorPagamento(Doacao doacao) {
 
-        String informacaoParaQr = "ID_DOACAO:" + doacao.getId() + ";VALOR:" + doacao.getValor() + ";EMPRESA_ID:" + "OBTER_ID_EMPRESA_DA_DOACAO";
+        String informacaoParaQr = "ID_DOACAO:" + doacao.getId() + ";VALOR:" + doacao.getValor() + "EMPRESA_ID:" + (doacao.getEmpresa() != null ? doacao.getEmpresa().getId() : "N/A");
         this.dadosQrGerado = "QRCodeData[" + informacaoParaQr + "]"; 
         System.out.println("QR Code gerado para Doacao ID " + doacao.getId() + ": " + this.dadosQrGerado);
         return this.dadosQrGerado; 
