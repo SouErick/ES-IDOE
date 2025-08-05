@@ -1,14 +1,20 @@
 package entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.CascadeType;
 
+@Entity
 public class PessoaFisica extends Pessoa {
+
     private String cpf;
     private int idade;
     private String tipoSanguineo;
-    private String rg; 
+    private String rg;
     private String sexo;
-    private String foto; 
+    private String foto;
 
+    @OneToOne(cascade = CascadeType.ALL)
     private Endereco enderecoPrincipal;
 
     public PessoaFisica() {

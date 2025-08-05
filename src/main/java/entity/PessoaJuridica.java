@@ -1,13 +1,19 @@
 package entity;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class PessoaJuridica extends Pessoa {
+
     private String cnpj;
     private String razaoSocial;
 
-
-    private List<Doacao> doacoesRealizadas;
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Doacao> doacoesRealizadas = new ArrayList<>();
 
     public PessoaJuridica() {
         super();

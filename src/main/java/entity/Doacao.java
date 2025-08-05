@@ -1,15 +1,25 @@
 package entity;
 
-import java.util.ArrayList; 
-import java.util.Date;
-import java.util.List;    
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+@Entity
 public class Doacao {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Date data; 
+    private Date data;
     private String titulo;
-    private String especificacao; 
+    private String especificacao;
     private double valor;
+
+    @ManyToOne
+    @JoinColumn(name = "empresa_id")
+    private PessoaJuridica empresa;
 
 
     private List<FormaPagamento> formasPagamento;

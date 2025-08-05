@@ -1,17 +1,26 @@
 package entity;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Pessoa {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     protected String nome;
     protected String email;
     protected String senha;
     protected String telefone;
-    protected String cep; 
+    protected String cep;
 
-
-    protected List<Endereco> enderecos;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "pessoa_id")
+    protected List<Endereco> enderecos = new ArrayList<>();
 
     public Pessoa() {
         this.enderecos = new ArrayList<>();
