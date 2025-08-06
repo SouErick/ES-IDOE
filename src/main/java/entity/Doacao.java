@@ -21,14 +21,15 @@ public class Doacao {
     @JoinColumn(name = "empresa_id")
     private PessoaJuridica empresa;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "doacao_id")
+    // A anotação @Transient foi adicionada aqui
+    @Transient
     private List<FormaPagamento> formasPagamento = new ArrayList<>();
 
+    // ... o restante da classe permanece o mesmo
+    
     public Doacao() {
         this.formasPagamento = new ArrayList<>(); 
     }
-
 
     public Doacao(int id, Date data, String titulo, String especificacao, double valor) {
         this.id = id;
