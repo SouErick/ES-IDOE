@@ -1,10 +1,18 @@
 package entity;
 
-import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Doacao {
@@ -19,13 +27,11 @@ public class Doacao {
 
     @ManyToOne
     @JoinColumn(name = "empresa_id")
+    @JsonBackReference
     private PessoaJuridica empresa;
 
-    // A anotação @Transient foi adicionada aqui
     @Transient
     private List<FormaPagamento> formasPagamento = new ArrayList<>();
-
-    // ... o restante da classe permanece o mesmo
     
     public Doacao() {
         this.formasPagamento = new ArrayList<>(); 

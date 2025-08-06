@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import dto.DoacaoDTO;
 import entity.Doacao;
+import entity.Pessoa;
 import entity.PessoaJuridica;
 import repository.DoacaoRepository;
 import repository.PessoaRepository;
@@ -22,8 +23,14 @@ public class DoacaoService {
     private PessoaRepository pessoaRepository;
 
     public Doacao registrarDoacao(DoacaoDTO dto) {
-        PessoaJuridica empresa = (PessoaJuridica) pessoaRepository.findById(dto.getEmpresaId())
-                .orElseThrow(() -> new RuntimeException("Empresa não encontrada"));
+        Pessoa pessoa = pessoaRepository.findById(dto.getEmpresaId())
+                .orElseThrow(() -> new RuntimeException("Pessoa com o ID fornecido não encontrada."));
+        
+        if (!(pessoa instanceof PessoaJuridica)) {
+            throw new IllegalArgumentException("Apenas Pessoas Jurídicas (empresas) podem registrar doações.");
+        }
+
+        PessoaJuridica empresa = (PessoaJuridica) pessoa;
 
         Doacao doacao = new Doacao();
         doacao.setTitulo(dto.getTitulo());
@@ -31,12 +38,14 @@ public class DoacaoService {
         doacao.setData(dto.getData());  
         doacao.setEspecificacao(dto.getEspecificacao());
         doacao.setEmpresa(empresa);
+        
         if (dto.getValor() <= 0) {
             throw new IllegalArgumentException("Valor da doação deve ser positivo.");
         }
         if (dto.getTitulo() == null || dto.getTitulo().isEmpty()) {
             throw new IllegalArgumentException("Título da doação é obrigatório.");
         }
+        
         return doacaoRepository.save(doacao);
     }
 
