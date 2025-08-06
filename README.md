@@ -30,22 +30,16 @@ O projeto segue o padrão **Model-View-Controller (MVC)** e utiliza as seguintes
 ### Diagramas de Sequência
 
 1.  **Listar Doações (`GET /doacoes`)**
-    `[Imagem do Diagrama de Sequência para Listar Doações]`
 
 2.  **Cadastrar Pessoa (`POST /usuarios`)**
-    `[Imagem do Diagrama de Sequência para Cadastrar Pessoa]`
 
 3.  **Listar Pessoas (`GET /usuarios`)**
-    `[Imagem do Diagrama de Sequência para Listar Pessoas]`
 
 4.  **Listar Pessoa Física ou Jurídica (`GET /usuarios/{id}`)**
-    `[Imagem do Diagrama de Sequência para Listar Pessoa por ID]`
 
 5.  **Criar Pedido de Doação (`POST /doacoes`)**
-    `[Imagem do Diagrama de Sequência para Criar Pedido de Doação]`
 
 6.  **Contribuir com Doação (`POST /doacoes/{id}/contribuir`)**
-    `[Imagem do Diagrama de Sequência para Contribuir com Doação]`
 
 ---
 
